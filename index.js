@@ -67,7 +67,8 @@ class Player extends React.Component {
         view: "GetFingers",
         playable: true,
         guessed: false,
-        fingers: FINGERS,
+        listFingers: FINGERS,
+        listGuess: GUESS,
         resolveFingersP,
       });
     });
@@ -79,7 +80,8 @@ class Player extends React.Component {
         view: "GetFingers",
         playable: true,
         guessed: true,
-        guess: GUESS,
+        listFingers: FINGERS,
+        listGuess: GUESS,
         resolveGuessP,
       });
     });
@@ -90,7 +92,11 @@ class Player extends React.Component {
     this.setState({ view: "Done", outcome: intToOutcome[outcome] });
   }
   seeWinning(winningNumber) {
-    this.setState({ view: "Wining", winningNumber: winningNumber });
+    const parsed = parseInt(winningNumber, 16);
+    this.setState({
+      view: "Wining",
+      winningNumber: isNaN(parsed) ? 0 : parsed,
+    });
   }
   informTimeout() {
     this.setState({ view: "Timeout" });

@@ -7,7 +7,8 @@ const exports = {};
 
 exports.GetFingers = class extends React.Component {
   render() {
-    const { parent, playable, guessed, fingers, guess } = this.props;
+    const { parent, playable, guessed, listFingers, listGuess, isDraw } =
+      this.props;
     const Fingers = ({ outcome }) => {
       return (
         <div>
@@ -24,7 +25,7 @@ exports.GetFingers = class extends React.Component {
 
     return (
       <div>
-        {/*fingers ? "It was a draw! Pick again." : ""*/}
+        {isDraw ? "It was a draw! Pick again." : ""}
         <br />
         {!playable
           ? "Please wait..."
@@ -34,10 +35,10 @@ exports.GetFingers = class extends React.Component {
         <div>
           {playable &&
             !guessed &&
-            fingers.map((el, i) => <Fingers outcome={el} key={i} />)}
+            listFingers.map((el, i) => <Fingers outcome={el} key={i} />)}
           {playable &&
             guessed &&
-            guess.map((el, i) => <Fingers outcome={el} key={i} />)}
+            listGuess.map((el, i) => <Fingers outcome={el} key={i} />)}
         </div>
       </div>
     );
